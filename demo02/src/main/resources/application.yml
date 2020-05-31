@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      ds-master:
+        url: jdbc:mysql://localhost:3306/test100?characterEncoding=UTF-8
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: root
+      ds-slave:
+        url: jdbc:mysql://localhost:3306/test200?characterEncoding=UTF-8
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: root
+
+#mybatis:
+#  mapper-locations: classpath:cn/king02/mapper/*Mapper.xml
+#  type-aliases-package: cn.king02.entity

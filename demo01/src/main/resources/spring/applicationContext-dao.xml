@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--数据源1-->
+    <bean id="dataSourceMaster" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <!-- 数据库基本信息配置 -->
+        <property name="url" value="${jdbc.master.url}" />
+        <property name="username" value="${jdbc.master.user}" />
+        <property name="password" value="${jdbc.master.password}" />
+        <property name="driverClassName" value="${jdbc.master.driver}" />
+    </bean>
+
+    <!--数据源2-->
+    <bean id="dataSourceSlave" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <!-- 数据库基本信息配置 -->
+        <property name="url" value="${jdbc.slave.url}" />
+        <property name="username" value="${jdbc.slave.user}" />
+        <property name="password" value="${jdbc.slave.password}" />
+        <property name="driverClassName" value="${jdbc.slave.driver}" />
+    </bean>
+
+    <!--动态获取数据源的类-->
+    <bean id="dataSource" class="cn.king.datasource.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry value-ref="dataSourceMaster" key="dataSourceMaster"/>
+                <entry value-ref="dataSourceSlave" key="dataSourceSlave"/>
+            </map>
+        </property>
+        <!-- 默认使用dataSourceMaster的数据源 -->
+        <property name="defaultTargetDataSource" ref="dataSourceMaster"/>
+    </bean>
+
+
+
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:cn/king/mapper/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.king.dao"/>
+    </bean>
+
+</beans>

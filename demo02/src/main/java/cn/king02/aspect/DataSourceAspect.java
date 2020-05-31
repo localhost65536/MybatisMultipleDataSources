@@ -1,0 +1,61 @@
+package cn.king02.aspect;
+
+import cn.king02.annotation.DataSource;
+import cn.king02.dataSource.DynamicDataSource;
+import cn.king02.enumeration.DataSourceType;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
+
+/**
+ * @author: wjl@king.cn
+ * @time: 2020/5/13 17:04
+ * @version: 1.0.0
+ * @description:
+ */
+@Aspect
+@Component
+public class DataSourceAspect {
+
+    @Pointcut("@annotation(cn.king02.annotation.DataSource)")
+    public void dataSourcePointCut() {
+
+    }
+
+    /**
+     * @author: wjl@king.cn
+     * @createTime: 2020/5/29 17:49
+     * @param: point
+     * @return: java.lang.Object
+     * @description: 环绕通知。根据方法上的注解动态切换数据源。
+     */
+    @Around("dataSourcePointCut()")
+    public Object around(ProceedingJoinPoint point) throws Throwable {
+        try {
+            // 获取当前执行的方法
+            MethodSignature signature = (MethodSignature) point.getSignature();
+            Method method = signature.getMethod();
+            // 获取方法上的@DataSource注解
+            DataSource dataSource = method.getAnnotation(DataSource.class);
+            // 如果没有@DataSource注解, 使用"ds-master"数据源
+            if (dataSource == null) {
+                DynamicDataSource.setDataSource(DataSourceType.MASTER);
+            } else {
+                // 如果有@DataSource注解, 使用该注解name属性值指定的数据源
+                // 切换整个系统的数据源.
+                DynamicDataSource.setDataSource(dataSource.name());
+            }
+            return point.proceed();
+
+        } finally {
+            // 清空数据源类型
+            DynamicDataSource.clearDataSource();
+        }
+    }
+
+}
