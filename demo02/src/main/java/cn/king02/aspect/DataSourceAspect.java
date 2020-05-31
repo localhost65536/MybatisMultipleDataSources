@@ -50,6 +50,7 @@ public class DataSourceAspect {
                 // 切换整个系统的数据源.
                 DynamicDataSource.setDataSource(dataSource.name());
             }
+            // 调用目标方法，返回目标方法的返回值
             return point.proceed();
 
         } finally {

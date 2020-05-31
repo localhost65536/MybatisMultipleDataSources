@@ -10,9 +10,6 @@ package cn.king02.enumeration;
 public enum DataSourceType {
 
     MASTER,
-    SLAVE;
-
-    // 数据源类型
-    private String dataSourceType;
+    SLAVE
 
 }
