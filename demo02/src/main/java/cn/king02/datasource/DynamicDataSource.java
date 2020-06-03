@@ -1,4 +1,4 @@
-package cn.king02.dataSource;
+package cn.king02.datasource;
 
 import cn.king02.enumeration.DataSourceType;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
@@ -20,7 +20,9 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         super.setDefaultTargetDataSource(defaultTargetDataSource);
         // 所有的数据源
         super.setTargetDataSources(targetDataSources);
-        super.afterPropertiesSet();
+
+        // 实现InitializingBean类就必须实现afterPropertiesSet()方法，这是Spring中Bean声明周期相关的方法。经测试此处可以不调用。
+        //super.afterPropertiesSet();
     }
 
     @Override

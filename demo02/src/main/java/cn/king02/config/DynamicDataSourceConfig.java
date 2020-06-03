@@ -1,7 +1,7 @@
 package cn.king02.config;
 
 
-import cn.king02.dataSource.DynamicDataSource;
+import cn.king02.datasource.DynamicDataSource;
 import cn.king02.enumeration.DataSourceType;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,7 +1,7 @@
 package cn.king02.aspect;
 
 import cn.king02.annotation.DataSource;
-import cn.king02.dataSource.DynamicDataSource;
+import cn.king02.datasource.DynamicDataSource;
 import cn.king02.enumeration.DataSourceType;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
