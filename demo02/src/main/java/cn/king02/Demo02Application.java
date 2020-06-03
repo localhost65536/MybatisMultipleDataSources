@@ -13,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @MapperScan(basePackages = "cn.king02.dao")
 @SpringBootApplication
+// 下面的写法能解决多数据源导致的循环依赖
+//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Demo02Application {
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(Demo02Application.class);
