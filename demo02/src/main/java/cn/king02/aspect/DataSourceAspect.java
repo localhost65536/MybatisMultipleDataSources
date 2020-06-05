@@ -2,7 +2,6 @@ package cn.king02.aspect;
 
 import cn.king02.annotation.DataSource;
 import cn.king02.datasource.DynamicDataSource;
-import cn.king02.enumeration.DataSourceType;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -42,14 +41,10 @@ public class DataSourceAspect {
             Method method = signature.getMethod();
             // 获取方法上的@DataSource注解
             DataSource dataSource = method.getAnnotation(DataSource.class);
-            // 如果没有@DataSource注解, 使用"ds-master"数据源
-            if (dataSource == null) {
-                DynamicDataSource.setDataSource(DataSourceType.MASTER);
-            } else {
-                // 如果有@DataSource注解, 使用该注解name属性值指定的数据源
-                // 切换整个系统的数据源.
-                DynamicDataSource.setDataSource(dataSource.name());
-            }
+
+            // 切换整个系统的数据源.
+            DynamicDataSource.setDataSource(dataSource.name());
+
             // 调用目标方法，返回目标方法的返回值
             return point.proceed();
 
