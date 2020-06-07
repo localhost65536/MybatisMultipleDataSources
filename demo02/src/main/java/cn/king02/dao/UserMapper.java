@@ -20,7 +20,7 @@ public interface UserMapper {
     @Insert("insert into tb_user ( `name` ) values ( #{name} )")
     boolean addUser(User user);
 
-    @DataSource(name = DataSourceType.SLAVE)
+    @DataSource(DataSourceType.SLAVE)
     @Select("select * from tb_user")
     List<User> findAll();
 

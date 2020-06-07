@@ -20,5 +20,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)   // 指定注解的生命周期。
 @Documented                           // 表示该注解注解应该被javadoc工具记录，默认情况下，javadoc是不包括注解的。
 public @interface DataSource {
-    DataSourceType name() default DataSourceType.MASTER;
+    DataSourceType value() default DataSourceType.MASTER;
 }

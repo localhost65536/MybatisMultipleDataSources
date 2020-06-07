@@ -6,12 +6,12 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       ds-master:
-        url: jdbc:mysql://localhost:3306/test100?characterEncoding=UTF-8
+        url: jdbc:mysql://localhost:3306/test500?characterEncoding=UTF-8
         driver-class-name: com.mysql.jdbc.Driver
         username: root
         password: root
       ds-slave:
-        url: jdbc:mysql://localhost:3306/test200?characterEncoding=UTF-8
+        url: jdbc:mysql://192.168.182.8:3306/test500?characterEncoding=UTF-8
         driver-class-name: com.mysql.jdbc.Driver
         username: root
         password: root

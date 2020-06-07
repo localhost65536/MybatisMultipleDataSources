@@ -1,7 +1,7 @@
 package cn.king02.aspect;
 
 import cn.king02.annotation.DataSource;
-import cn.king02.datasource.DynamicDataSource;
+import cn.king02.datasource.DataSourceContextHolder;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -43,14 +43,14 @@ public class DataSourceAspect {
             DataSource dataSource = method.getAnnotation(DataSource.class);
 
             // 切换整个系统的数据源.
-            DynamicDataSource.setDataSource(dataSource.name());
+            DataSourceContextHolder.setDataSource(dataSource.value());
 
             // 调用目标方法，返回目标方法的返回值
             return point.proceed();
 
         } finally {
             // 清空数据源类型
-            DynamicDataSource.clearDataSource();
+            DataSourceContextHolder.clearDataSource();
         }
     }
 

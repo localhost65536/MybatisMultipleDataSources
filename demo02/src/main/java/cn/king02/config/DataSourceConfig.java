@@ -22,7 +22,7 @@ import java.util.Map;
  * @since: 1.0
  */
 @Configuration
-public class DynamicDataSourceConfig {
+public class DataSourceConfig {
 
     // 配置数据源
     @Bean
