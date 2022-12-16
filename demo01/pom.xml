@@ -16,7 +16,7 @@
         <!--统一版本-->
         <pagehelper.version>5.0.0</pagehelper.version>
         <generator.version>1.3.5</generator.version>
-        <webmvc.version>4.3.7.RELEASE</webmvc.version>
+        <webmvc.version>5.2.20.RELEASE</webmvc.version>
         <jackson.version>2.8.8</jackson.version>
         <jdbc.version>4.3.7.RELEASE</jdbc.version>
         <spring-test.version>4.3.7.RELEASE</spring-test.version>
